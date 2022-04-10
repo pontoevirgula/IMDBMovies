@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
                 val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid4)
                 binding.rvHome.addItemDecoration(SpacingItemDecoration(spacingInPixels))
 
-                val adapter = HomeAdapter(requireContext(), mutableListOf()) { movieClicked ->
+                val adapter = HomeAdapter(mutableListOf()) { movieClicked ->
                     val intent = DetailActivity.getStartIntent(requireContext(), movieClicked)
                     startActivity(intent)
                 }

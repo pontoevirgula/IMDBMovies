@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/tv_favorite_title"
@@ -13,7 +13,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="20sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textStyle="bold"
         android:text="@string/title_favorite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +24,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorite_recycler_view"
+        tools:listitem="@layout/adapter_movie_item"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"

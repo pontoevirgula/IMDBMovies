@@ -17,32 +17,33 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoriteFragment : Fragment() {
 
     private val viewModel by viewModel<FavoriteViewModel>()
-    private var _binding : FragmentFavoriteBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-       _binding = FragmentFavoriteBinding.inflate(layoutInflater)
-       return binding.root
+    ): View {
+        _binding = FragmentFavoriteBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.listFavoriteMovies.observe(this){ movies ->
-            binding.favoriteRecyclerView.layoutManager = GridLayoutManager(activity, 3)
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid4)
-            binding.favoriteRecyclerView.addItemDecoration(
-                SpacingItemDecoration(
-                    spacingInPixels
+        viewModel.listFavoriteMovies.observe(this) { favoriteMovies ->
+
+            if (!favoriteMovies.isNullOrEmpty()) {
+                binding.favoriteRecyclerView.layoutManager = GridLayoutManager(activity, 3)
+                val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid4)
+                binding.favoriteRecyclerView.addItemDecoration(
+                    SpacingItemDecoration(spacingInPixels)
                 )
-            )
-            context?.let {
-                binding.favoriteRecyclerView.adapter = HomeAdapter(it, movies as MutableList<Results>){ results->
-                    val intent = DetailActivity.getStartIntent(it, results)
+
+                val adapter = HomeAdapter(mutableListOf()) { favoriteClicked ->
+                    val intent = DetailActivity.getStartIntent(requireContext(), favoriteClicked)
                     startActivity(intent)
                 }
-
+                adapter.replaceAllMovies(favoriteMovies)
+                binding.favoriteRecyclerView.adapter = adapter
             }
         }
     }

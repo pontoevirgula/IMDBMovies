@@ -1,6 +1,5 @@
 package com.chslcompany.imdbmovies.view.home
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +8,7 @@ import com.chslcompany.imdbmovies.BuildConfig
 import com.chslcompany.imdbmovies.databinding.AdapterMovieItemBinding
 import com.chslcompany.imdbmovies.model.Results
 
-class HomeAdapter(private val context: Context,
-                  private val movies: MutableList<Results> = mutableListOf(),
+class HomeAdapter(private val movies: MutableList<Results>,
                   private val onItemClick: (resultList : Results) -> Unit) : RecyclerView.Adapter<HomeAdapter.MovieViewHolder>() {
 
     private lateinit var binding: AdapterMovieItemBinding
@@ -40,7 +38,7 @@ class HomeAdapter(private val context: Context,
 
         fun bind(results: Results) {
             val image = BuildConfig.IMAGE + results.poster_path
-            Glide.with(context)
+            Glide.with(itemView)
                 .load(image)
                 .into(binding.ivMovieImage)
 
