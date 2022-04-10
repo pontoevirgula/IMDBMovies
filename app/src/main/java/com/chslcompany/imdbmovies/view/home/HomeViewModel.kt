@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chslcompany.imdbmovies.core.util.RequestStatus
 import com.chslcompany.imdbmovies.model.Results
 import com.chslcompany.imdbmovies.repository.MovieRepository
 import kotlinx.coroutines.launch

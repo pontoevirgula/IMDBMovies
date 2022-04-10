@@ -1,4 +1,4 @@
-package com.chslcompany.imdbmovies.view.home
+package com.chslcompany.imdbmovies.core.util
 
 data class RequestStatus(val status : Status, val message: String? = null){
     companion object{
